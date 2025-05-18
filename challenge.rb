@@ -6,19 +6,19 @@ require "ascii_charts"
 require "date"
 require "openai"
 
+pp "Hello! How can I help you today?"
+puts "__________________________________________________"
+
+request = gets.chomp
+
+require "openai"
+require "dotenv/load"
+
 client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_KEY"))
 
 # Prepare an Array of previous messages
-message_list = [
-  {
-    "role" => "system",
-    "content" => "You are a helpful assistant who talks like Shakespeare."
-  },
-  {
-    "role" => "user",
-    "content" => "Hello! What are the best spots for pizza in Chicago?"
-  }
-]
+if user_input != "bye"
+  message_list.push({ "role" => "user", "content" => user_input })
 
 # Call the API to get the next message from GPT
 api_response = client.chat(
@@ -29,4 +29,3 @@ api_response = client.chat(
 )
 
 pp api_response
-
